@@ -3,23 +3,20 @@ const startWorkButton = document.querySelector('#work-time-start');
 const increaseWorkTime = document.querySelector('#work-time-up');
 const decreaseWorkTime = document.querySelector('#work-time-down');
 const pauseWorkTime = document.querySelector('#work-time-pause')
+const workTimeDisplay = document.querySelector('#work-time-display');
 let workDeadline = undefined;
 let workUp = 0;
 let workDown = 0;
 let workTimeLeft = 0;
 let workCountdown = ''
+let workPauseToggle = true;
+let workStartToggle = true;
 
 function runWorkInterval() {
-        const workTimeDisplay = document.querySelector('#work-time-display');
         workCountdown = setInterval(function(){
             let current = new Date().getTime();
             workTimeLeft = workDeadline - current;
-            pauseWorkTime.addEventListener('click', pauseWork)
-            let minutes = Math.floor(workTimeLeft / (1000 * 60));
-            if (minutes < 10) minutes = '0' + minutes;
-            let seconds = Math.floor((workTimeLeft / 1000) % 60);
-            if (seconds < 10) seconds = '0' + seconds;
-            workTimeDisplay.textContent = `${minutes}` + ':' + `${seconds}`;
+            updateRunningWorkTime();
             if (workTimeLeft <= 0) {
                 clearInterval(workCountdown);
                 workTimeDisplay.textContent = '00:00'
@@ -27,47 +24,106 @@ function runWorkInterval() {
         });
         
 }
-function setWorkTime() {
+function setTotalWorkTime() {
     let now = new Date().getTime();
     totalTime = 1500000 + workUp + workDown; // 25 minutes * 60 * 1000.
+    updateStaticWorkTime();
     workDeadline = now + totalTime;
     return workDeadline;
+    
+}
+function updateRunningWorkTime() {
+    let minutes = Math.floor(workTimeLeft / (1000 * 60));
+    if (minutes < 10) minutes = '0' + minutes;
+    let seconds = Math.floor((workTimeLeft / 1000) % 60);
+    if (seconds < 10) seconds = '0' + seconds;
+    workTimeDisplay.textContent = `${minutes}` + ':' + `${seconds}`;
+}
+function updateStaticWorkTime() {
+    let minutes = Math.floor(totalTime / (1000 * 60));
+    if (minutes < 10) minutes = '0' + minutes;
+    let seconds = Math.floor((totalTime / 1000) % 60);
+    if (seconds < 10) seconds = '0' + seconds;
+    workTimeDisplay.textContent = `${minutes}` + ':' + `${seconds}`;
 }
 function pauseWork() {
-    let tempWorkTime = workTimeLeft;
-    clearInterval(workCountdown);
+    if (workPauseToggle == true) {
+        tempWorkTimeLeft = workTimeLeft;
+        clearInterval(workCountdown);
+        pauseWorkTime.textContent = 'Resume'
+        workPauseToggle = false;
+    } else if (workPauseToggle == false) {
+        let now = new Date().getTime();
+        workDeadline = now + tempWorkTimeLeft;
+        runWorkInterval();
+        pauseWorkTime.textContent = 'Pause'
+        workPauseToggle = true;
+    }
 }
 increaseWorkTime.addEventListener('click', () => {
-    return workUp += 60000;
+        workUp += 60000;
+        return setTotalWorkTime();
 });
 decreaseWorkTime.addEventListener('click', () => {
-    return workDown -= 60000;
+        workDown -= 60000;
+        return setTotalWorkTime();
 })
 startWorkButton.addEventListener('click', () => {
-    setWorkTime();
-    runWorkInterval();
+    if (workStartToggle == true) {
+        setTotalWorkTime();
+        runWorkInterval();
+        startWorkButton.textContent = 'Stop'
+        workStartToggle = false;
+    } else if (workStartToggle == false) {
+        clearInterval(workCountdown);
+        updateStaticWorkTime();
+        startWorkButton.textContent = 'Start'
+        workStartToggle = true;
+    }
 });
+pauseWorkTime.addEventListener('click', pauseWork)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //PLAY CLOCK
 const startPlayButton = document.querySelector('#play-time-start');
 const increasePlayTime = document.querySelector('#play-time-up');
 const decreasePlayTime = document.querySelector('#play-time-down');
 const pausePlayTime = document.querySelector('#play-time-pause')
+const playTimeDisplay = document.querySelector('#play-time-display');
 let playDeadline = undefined;
 let playTimeLeft = 0;
 let playCountdown = '';
 let playUp = 0;
 let playDown = 0;
+let playToggle = true;
 function runPlayInterval() {
-        const playTimeDisplay = document.querySelector('#play-time-display');
         playCountdown = setInterval(function(){
             let current = new Date().getTime();
             playTimeLeft = playDeadline - current;
-            pausePlayTime.addEventListener('click', pausePlay)
-            let minutes = Math.floor(playTimeLeft / (1000 * 60));
-            if (minutes < 10) minutes = '0' + minutes;
-            let seconds = Math.floor((playTimeLeft / 1000) % 60);
-            if (seconds < 10) seconds = '0' + seconds;
-            playTimeDisplay.textContent = `${minutes}` + ':' + `${seconds}`;
+            updatePlayTime();
             if (playTimeLeft <= 0) {
                 clearInterval(playCountdown);
                 playTimeDisplay.textContent = '00:00'
@@ -76,14 +132,36 @@ function runPlayInterval() {
         
 }
 startPlayButton.addEventListener('click', () => {
-    setPlayTime();
+    setTotalPlayTime();
     runPlayInterval();
 });
-function setPlayTime() {
+function pausePlay() {
+    if (playToggle == true) {
+        tempPlayTimeLeft = playTimeLeft;
+        clearInterval(playCountdown);
+        pausePlayTime.textContent = 'resume'
+        playToggle = false;
+    } else if (playToggle == false) {
+        let now = new Date().getTime();
+        playDeadline = now + tempPlayTimeLeft;
+        runPlayInterval();
+        pausePlayTime.textContent = 'pause'
+        playToggle = true;
+    }
+   
+}
+function setTotalPlayTime() {
     let now = new Date().getTime();
     let totalTime = 300000 + playUp + playDown; // minutes * 60 * 1000.
     playDeadline = now + totalTime;
     return playDeadline;
+}
+function updatePlayTime() {
+    let minutes = Math.floor(playTimeLeft / (1000 * 60));
+    if (minutes < 10) minutes = '0' + minutes;
+    let seconds = Math.floor((playTimeLeft / 1000) % 60);
+    if (seconds < 10) seconds = '0' + seconds;
+    playTimeDisplay.textContent = `${minutes}` + ':' + `${seconds}`;
 }
 increasePlayTime.addEventListener('click', () => {
     return playUp += 60000;
@@ -94,3 +172,4 @@ decreasePlayTime.addEventListener('click', () => {
 function pausePlay() {
     clearInterval(playCountdown);
 }
+pausePlayTime.addEventListener('click', pausePlay)
