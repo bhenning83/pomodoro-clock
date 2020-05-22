@@ -59,6 +59,7 @@ function updateStaticWorkTime() {
     workTimeDisplay.textContent = `${minutes}` + ':' + `${seconds}`;
 }
 function pauseWork() {
+    if (workStartToggle == true) return;
     if (workPauseToggle == true) {
         tempWorkTimeLeft = workTimeLeft;
         clearInterval(workCountdown);
@@ -68,7 +69,7 @@ function pauseWork() {
         let now = new Date().getTime();
         workDeadline = now + tempWorkTimeLeft;
         runWorkInterval();
-        pauseWorkTime.textContent = 'Pause'
+        pauseWorkTime.textContent = 'Pause';
         workPauseToggle = true;
     }
 }
@@ -77,7 +78,9 @@ function workReset() {
     workTimeDisplay.style.color = 'black';
     setTotalWorkTime();
     workStartToggle = true;
-    startWorkButton.textContent = 'start';
+    workPauseToggle = true;
+    pauseWorkTime.textContent = 'Pause';
+    startWorkButton.textContent = 'Start';
 }
 increaseWorkTime.addEventListener('click', () => {
         workUp += 60000;
@@ -95,9 +98,7 @@ startWorkButton.addEventListener('click', () => {
         workStartToggle = false;
     } else if (workStartToggle == false) {
         clearInterval(workCountdown);
-        updateStaticWorkTime();
-        startWorkButton.textContent = 'Start'
-        workStartToggle = true;
+        workReset();
     }
 });
 pauseWorkTime.addEventListener('click', pauseWork)
