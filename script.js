@@ -109,7 +109,7 @@ let playTimeLeft = 0;
 let playCountdown = ''
 let playPauseToggle = true;
 let playStartToggle = true;
-//let alarm = new Audio('Sounds/alarm.wav')
+let gong = new Audio('Sounds/gong.wav')
 
 function runPlayInterval() {
         playCountdown = setInterval(function(){
@@ -120,7 +120,7 @@ function runPlayInterval() {
                 clearInterval(playCountdown);
                 playTimeDisplay.textContent = '00:00';
                 playTimeDisplay.style.color = 'red';
-                alarm.play()
+                gong.play()
             };
         });
     }      

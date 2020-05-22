@@ -1,6 +1,7 @@
 #page-container {
     height: 100%;
-    background-color: lightgray;
+    background-image: url('background.jpg');
+    background-position: center;
     display: flex;
     flex-direction: column;
     align-items: center;
