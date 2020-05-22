@@ -11,6 +11,7 @@ let workTimeLeft = 0;
 let workCountdown = ''
 let workPauseToggle = true;
 let workStartToggle = true;
+let alarm = new Audio('Sounds/alarm.wav')
 
 function runWorkInterval() {
         workCountdown = setInterval(function(){
@@ -19,11 +20,22 @@ function runWorkInterval() {
             updateRunningWorkTime();
             if (workTimeLeft <= 0) {
                 clearInterval(workCountdown);
-                workTimeDisplay.textContent = '00:00'
-            }
+                workTimeDisplay.textContent = '00:00';
+                workTimeDisplay.style.color = 'red';
+                alarm.play()
+                let stopAlarm = document.createElement('button')
+                stopAlarm.setAttribute('id', 'stop-alarm')
+                stopAlarm.textContent = 'stop'
+                workTimeDisplay.appendChild(stopAlarm)
+                stopAlarm.addEventListener('click', () =>  {
+                    stopAlarm.remove()
+                    workReset()
+                });
+            };
         });
+    }
         
-}
+        
 function setTotalWorkTime() {
     let now = new Date().getTime();
     totalTime = 1500000 + workUp + workDown; // 25 minutes * 60 * 1000.
@@ -59,6 +71,13 @@ function pauseWork() {
         pauseWorkTime.textContent = 'Pause'
         workPauseToggle = true;
     }
+}
+function workReset() {
+    alarm.pause();
+    workTimeDisplay.style.color = 'black';
+    setTotalWorkTime();
+    workStartToggle = true;
+    startWorkButton.textContent = 'start';
 }
 increaseWorkTime.addEventListener('click', () => {
         workUp += 60000;
