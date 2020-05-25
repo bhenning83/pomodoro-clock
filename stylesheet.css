@@ -11,40 +11,49 @@
 #work-time-container {
     display: grid;
     grid-gap: 2px;
-    grid-template-rows: 1fr 1fr;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     grid-template-areas:
-    'wup wtime wtime wdown'
-    '. wgo wpause .';
-    padding-bottom: 200px;
+    'wtime wtime'
+    'wup wdown'
+    'wgo wpause';
+    padding-bottom: 160px;
 }
 #play-time-container {
     display: grid;
     grid-gap: 2px;
     color: white;
-    grid-template-rows: 1fr 1fr;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     grid-template-areas:
-    'pup ptime ptime pdown'
-    '. pgo ppause .';
+    'ptime ptime'
+    'pup pdown'
+    'pgo ppause';
 }
 .play-pause {
     height: 20px;
     width: 65px;
 }
+button {
+    height: 20px;
+}
 #play-title {
+    border-bottom: 2px solid white;
     color: white;
+    margin-bottom: 15px;
 }
 #work-title {
-    padding-top: 60px;
+    padding-top: 55px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid black;
 }
 #work-time-up {
     grid-area: wup;
-    font-size: 20px;
+    font-size: 16px;
 }
 #work-time-down {
     grid-area: wdown;
-    font-size: 20px;
+    font-size: 16px;
 }
 #work-time-display {
     font-size: 30px;
@@ -59,11 +68,11 @@
 }
 #play-time-up {
     grid-area: pup;
-    font-size: 20px;
+    font-size: 16px;
 }
 #play-time-down {
     grid-area: pdown;
-    font-size: 20px;
+    font-size: 16px;
 }
 #play-time-display {
     font-size: 30px;
