@@ -1,13 +1,16 @@
 #page-container {
-    height: 100%;
-    background-image: url('background.jpg');
+    height: 100vh;
+    background-image: url('ying-yang.png');
+    background-repeat: no-repeat;
     background-position: center;
+    background-size: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 #work-time-container {
     display: grid;
+    grid-gap: 2px;
     grid-template-rows: 1fr 1fr;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-areas:
@@ -17,19 +20,34 @@
 }
 #play-time-container {
     display: grid;
+    grid-gap: 2px;
+    color: white;
     grid-template-rows: 1fr 1fr;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-areas:
     'pup ptime ptime pdown'
     '. pgo ppause .';
 }
+.play-pause {
+    height: 20px;
+    width: 65px;
+}
+#play-title {
+    color: white;
+}
+#work-title {
+    padding-top: 60px;
+}
 #work-time-up {
     grid-area: wup;
+    font-size: 20px;
 }
 #work-time-down {
     grid-area: wdown;
+    font-size: 20px;
 }
 #work-time-display {
+    font-size: 30px;
     grid-area: wtime;
     text-align: center;
 }
@@ -41,11 +59,14 @@
 }
 #play-time-up {
     grid-area: pup;
+    font-size: 20px;
 }
 #play-time-down {
     grid-area: pdown;
+    font-size: 20px;
 }
 #play-time-display {
+    font-size: 30px;
     grid-area: ptime;
     text-align: center;
 }
