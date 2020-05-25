@@ -2,63 +2,71 @@
     height: 100vh;
     background-image: url('ying-yang.png');
     background-repeat: no-repeat;
-    background-position: center;
-    background-size: 100vh;
+    background-position: 50% 4.5rem;
+    background-size: auto 31.875rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
 }
 #work-time-container {
     display: grid;
     grid-gap: 2px;
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-areas:
-    'wtime wtime'
-    'wup wdown'
-    'wgo wpause';
-    padding-bottom: 160px;
+    'wup wtime wtime wdown'
+    '. wgo wpause .';
+    padding-bottom: 7.5rem; 
 }
 #play-time-container {
     display: grid;
     grid-gap: 2px;
     color: white;
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-areas:
-    'ptime ptime'
-    'pup pdown'
-    'pgo ppause';
+    'pup ptime ptime pdown'
+    '. pgo ppause .';
 }
 .play-pause {
-    height: 20px;
-    width: 65px;
+    height: 0.9375rem;
+    width: 3.049rem;
+    text-align: center;
 }
 button {
-    height: 20px;
+    height: 0.9375rem
+}
+.pointer:hover {
+cursor: pointer;
 }
 #play-title {
     border-bottom: 2px solid white;
     color: white;
-    margin-bottom: 15px;
+    margin-bottom: 0.7rem;
 }
 #work-title {
-    padding-top: 55px;
-    margin-bottom: 15px;
+    padding-top: 7.5rem;
+    margin-bottom: 0.7rem;
     border-bottom: 2px solid black;
 }
 #work-time-up {
     grid-area: wup;
-    font-size: 16px;
+    font-size: 0.75rem;
+    justify-self: end;
+    align-self: center;
 }
 #work-time-down {
     grid-area: wdown;
-    font-size: 16px;
+    font-size: 0.68rem;
+    justify-self: start;
+    align-self: center;
 }
 #work-time-display {
-    font-size: 30px;
+    font-size: 1.406rem;
     grid-area: wtime;
     text-align: center;
+    letter-spacing: 5px;
 }
 #work-time-start {
     grid-area: wgo;
@@ -68,16 +76,21 @@ button {
 }
 #play-time-up {
     grid-area: pup;
-    font-size: 16px;
+    font-size: 0.75rem;
+    justify-self: end;
+    align-self: center;
 }
 #play-time-down {
     grid-area: pdown;
-    font-size: 16px;
+    font-size: 0.68rem;
+    justify-self: start;
+    align-self: center;
 }
 #play-time-display {
-    font-size: 30px;
+    font-size: 1.406rem;
     grid-area: ptime;
     text-align: center;
+    letter-spacing: 5px;
 }
 #play-time-start {
     grid-area: pgo;

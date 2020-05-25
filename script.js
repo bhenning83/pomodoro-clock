@@ -182,12 +182,12 @@ startPlayButton.addEventListener('click', () => {
     }
 });
 increasePlayTime.addEventListener('click', () => {  
-    if (playStartToggle == false) return alert('That defeats the purpose of the pomodoro technique, dummy.');
+    if (playStartToggle == false) return alert('That defeats the purpose of the Pomodoro technique, dummy.');
         playUp += 60000;
         return setTotalPlayTime();
 });
 decreasePlayTime.addEventListener('click', () => {
-    if (playStartToggle == false) return alert('That defeats the purpose of the pomodoro technique, dummy.');
+    if (playStartToggle == false) return alert('That defeats the purpose of the Pomodoro technique, dummy.');
         playDown -= 60000;
         return setTotalPlayTime();
 })
