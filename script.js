@@ -163,7 +163,7 @@ function pausePlay() {
 }
 function playReset() {
     alarm.pause();
-    playTimeDisplay.style.color = 'black';
+    playTimeDisplay.style.color = 'white';
     setTotalPlayTime();
     playStartToggle = true;
     playPauseToggle = true;
